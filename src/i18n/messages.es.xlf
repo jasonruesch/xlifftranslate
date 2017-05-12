@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="es">
+    <body>
+      <trans-unit id="533cc639b1f65d584649e168b3fe801eb85b065c" datatype="html">
+        <source>FLAT</source>
+        <target xml:lang="es" state="translated">PLANO</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="58ce746d81010e7ec83482b9a4782de92741aca3" datatype="html">
+        <source>RAISED</source>
+        <target xml:lang="es" state="translated">ELEVADO</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4f23659079c972a6cba578e6c162119d47746dfd" datatype="html">
+        <source>This is a tooltip!</source>
+        <target xml:lang="es" state="translated">Esta es una información de herramientas!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d6fa6e0144ff8479f43b270dca9278ef1f05a21d" datatype="html">
+        <source>PRIMARY RAISED</source>
+        <target xml:lang="es" state="translated">PRIMARIO LEVANTADO</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="865805ae75a1c40715ceee703f53438f789f0434" datatype="html">
+        <source>ACCENT RAISED</source>
+        <target xml:lang="es" state="translated">ACCENT RAISED</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ccd5cd040814dbd955440eee74c6039f1e570f82" datatype="html">
+        <source>Unchecked</source>
+        <target xml:lang="es" state="translated">Desenfrenado</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5dfc570873a3e0c9424fec3df59cd83140076fa5" datatype="html">
+        <source>Checked</source>
+        <target xml:lang="es" state="translated">Comprobado</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="31e03d83ca79bdbb4ed1ce34991f3f34d4644e4c" datatype="html">
+        <source>Indeterminate</source>
+        <target xml:lang="es" state="translated">Indeterminado</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f39256070bfc0714020dfee08895421fc1527014" datatype="html">
+        <source>Disabled</source>
+        <target xml:lang="es" state="translated">Discapacitado</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c228297b1d315d5c3b00588f0a624371d627c829" datatype="html">
+        <source>Alpha</source>
+        <target xml:lang="es" state="translated">Alfa</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="313fcf0f8dac5ff5800a3e6bd67cb1955089ccca" datatype="html">
+        <source>Beta</source>
+        <target xml:lang="es" state="translated">Beta</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e56ce2836c2671e64c507813aaf16dba05c1e842" datatype="html">
+        <source>Gamma</source>
+        <target xml:lang="es" state="translated">Gama</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="62b6c66981335ca6eecc36b331103c60f09d1026" datatype="html">
+        <source>First name</source>
+        <target xml:lang="es" state="translated">Nombre de pila</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ad40282684357d3d79d14d036fcf26d3cef8278d" datatype="html">
+        <source>Nickname</source>
+        <target xml:lang="es" state="translated">Apodo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="589403365e102b2237f4a213f78b13409914c29e" datatype="html">
+        <source>Favorite phone</source>
+        <target xml:lang="es" state="translated">Teléfono favorito</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aea96c7820b57b2b5343ce59b90e3b76615c914d" datatype="html">
+        <source>Motorcycle model</source>
+        <target xml:lang="es" state="translated">Modelo de la motocicleta</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="83fdc20cb88e57f3255afa2ab3e9f7bc5eb53715" datatype="html">
+        <source>Indeterminate progress-bar</source>
+        <target xml:lang="es" state="translated">Barra de progreso indeterminada</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1c50c4b457f16d8186797f6837da1f11abe49c38" datatype="html">
+        <source>Determinate progress bar - <x id="INTERPOLATION"/>%</source>
+        <target xml:lang="es" state="translated">Barra de progreso determinada - <x id="INTERPOLATION"/>%</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d75181846d13343c443f3b8db0f0ec6463e28ae7" datatype="html">
+        <source>EARTH</source>
+        <target xml:lang="es" state="translated">TIERRA</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6382f0e408575450219d3a10f8883a8f6c67e7d7" datatype="html">
+        <source>FIRE</source>
+        <target xml:lang="es" state="translated">FUEGO</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="394e6a27ec9e9b47ad08acb4852a7acf3aa4e78d" datatype="html">
+        <source>Lemon</source>
+        <target xml:lang="es" state="translated">Limón</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dbe42503492c4c30e722fb3b3ecc3dbf583fa715" datatype="html">
+        <source>Lime</source>
+        <target xml:lang="es" state="translated">Lima</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="209bd4141e04a602b979e5016d402bb494468ceb" datatype="html">
+        <source>Banana</source>
+        <target xml:lang="es" state="translated">Plátano</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">108</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="de2e8a4e78a7fe958c72eaa5c9ff7c3079d7392a" datatype="html">
+        <source>Last dialog result: <x id="INTERPOLATION"/></source>
+        <target xml:lang="es" state="translated">Resultado del último diálogo: <x id="INTERPOLATION"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b7223438e0e41c5a8993c73fa2f8f67ec99de26f" datatype="html">
+        <source>DIALOG</source>
+        <target xml:lang="es" state="translated">DIÁLOGO</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c3fffe4e6d2c991bc1164a3bb78c9ac5b7e086af" datatype="html">
+        <source>SNACKBAR</source>
+        <target xml:lang="es" state="translated">SNACKBAR</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.ts</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d27b38099827456b536d43c218ed23d46dd39d69" datatype="html">
+        <source>Page not found!</source>
+        <target xml:lang="es" state="translated">¡Página no encontrada!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/page-not-found/page-not-found.component.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b88b6bdbcdbfcd4538ca808cc5ee3f7b39610739" datatype="html">
+        <source>Sidenav</source>
+        <target xml:lang="es" state="translated">Sidenav</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="862c07ed0bae1559260d255172d2240a01bf2693" datatype="html">
+        <source>Angular Material2 Example App</source>
+        <target xml:lang="es" state="translated">Ejemplo de aplicación Angular Material2</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="51c8e5e75b5d2b87deb329807fb690728a74ab25" datatype="html">
+        <source>Toggle Dark Theme</source>
+        <target xml:lang="es" state="translated">Toggle Dark Tema</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

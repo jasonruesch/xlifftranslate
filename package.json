@@ -1,0 +1,44 @@
+{
+  "name": "xlifftranslate",
+  "description": "Translate xliff files using the Google Cloud Translation API",
+  "version": "0.0.1",
+  "author": {
+    "name": "Jason Ruesch",
+    "email": "jason.ruesch@me.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JasonRuesch/xlifftranslate.git"
+  },
+  "bug": {
+    "url": "https://github.com/JasonRuesch/xlifftranslate/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jasonruesch/xlifftranslate/blob/master/LICENSE"
+    }
+  ],
+  "main": "index.js",
+  "scripts": {
+    "start": "GCLOUD_PROJECT=jason-ruesch GOOGLE_APPLICATION_CREDENTIALS=service_account.json node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "translate": "GCLOUD_PROJECT=jason-ruesch GOOGLE_APPLICATION_CREDENTIALS=service_account.json gulp i18n-update"
+  },
+  "dependencies": {
+    "@google-cloud/translate": "^0.8.1"
+  },
+  "devDependencies": {
+    "async": "^2.4.0",
+    "gulp": "^3.9.1",
+    "gulp-cheerio": "^0.6.2",
+    "gulp-modify-file": "^0.1.0",
+    "gulp-pretty-data": "^0.2.0",
+    "gulp-remove-empty-lines": "^0.0.8",
+    "gulp-rename": "^1.2.2"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "xliffmerge": "index.js"
+  }
+}
