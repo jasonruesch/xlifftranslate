@@ -1,4 +1,4 @@
-[![NPM version](https://badge.fury.io/js/xlifftranslate.svg)](http://badge.fury.io/js/xlifftranslate)
+[![npm][npm-badge]][npm-badge-url]
 
 # xlifftranslate
 > Translate xliff files using the Google Cloud Translation API
@@ -16,3 +16,6 @@
 
 To run:
 `GOOGLE_APPLICATION_CREDENTIALS=service_account.json xlifftranslate --i18nPath src/i18n`
+
+[npm-badge]: https://img.shields.io/npm/v/xlifftranslate.svg
+[npm-badge-url]: https://www.npmjs.com/package/xlifftranslate
