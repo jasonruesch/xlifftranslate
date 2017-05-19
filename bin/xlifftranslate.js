@@ -55,7 +55,7 @@ function run() {
       var tasks = [];
       var locale = fileParts[1];
       var lang = locale;
-      if (lang.indexOf('-') !== -1 && ['en-GB', 'zh-CN'].indexOf(lang) < 0) {
+      if (lang.indexOf('-') !== -1) {
         lang = lang.split('-')[0];
       }
       if (lang.indexOf('_') !== -1) {
