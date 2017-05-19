@@ -1,3 +1,1 @@
-#!/usr/bin/env node
-
-console.log('Success');
+module.exports = require('./package');

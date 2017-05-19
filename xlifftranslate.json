@@ -1,0 +1,22 @@
+{
+  "xlifftranslateOptions": {
+    "srcDir": "src/i18n",
+    "genDir": "src/i18n",
+    "i18nFile": "source.xlf",
+    "i18nFormat": "xlf",
+    "encoding": "UTF-8",
+    "defaultLanguage": "en",
+    "languages": [
+      "de",
+      "en-GB",
+      "es",
+      "fr",
+      "pt",
+      "zh-CN",
+      "nl"
+    ],
+    "removeUnusedIds": true,
+    "verbose": false,
+    "quiet": false
+  }
+}

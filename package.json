@@ -21,24 +21,25 @@
   ],
   "main": "index.js",
   "scripts": {
-    "start": "GCLOUD_PROJECT=jason-ruesch GOOGLE_APPLICATION_CREDENTIALS=service_account.json node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "translate": "GCLOUD_PROJECT=jason-ruesch GOOGLE_APPLICATION_CREDENTIALS=service_account.json gulp i18n-update"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "@google-cloud/translate": "^0.8.1"
-  },
-  "devDependencies": {
-    "async": "^2.4.0",
-    "gulp": "^3.9.1",
-    "gulp-cheerio": "^0.6.2",
-    "gulp-modify-file": "^0.1.0",
-    "gulp-pretty-data": "^0.2.0",
-    "gulp-remove-empty-lines": "^0.0.8",
-    "gulp-rename": "^1.2.2"
-  },
-  "preferGlobal": true,
   "bin": {
-    "xliffmerge": "index.js"
+    "xlifftranslate": "./bin/xlifftranslate.js"
+  },
+  "keywords": [
+    "command line",
+    "language",
+    "xliff",
+    "translate",
+    "Google Translate",
+    "Google Cloud"
+  ],
+  "dependencies": {
+    "@google-cloud/translate": "^0.8.1",
+    "async": "^2.4.0",
+    "cheerio": "^0.22.0",
+    "interpret": "^1.0.3",
+    "liftoff": "^2.3.0",
+    "minimist": "^1.2.0"
   }
 }
