@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-// Run with: GOOGLE_APPLICATION_CREDENTIALS=service_account.json xlifftranslate
-
 var Liftoff = require('liftoff');
 var argv = require('minimist')(process.argv.slice(2));
 var cheerio = require('cheerio');
@@ -12,24 +10,10 @@ var Translate = require('@google-cloud/translate');
 var translate = Translate();
 
 var XliffTranslate = new Liftoff({
-  name: 'xlifftranslate',
-  configName: 'xlifftranslate.json',
-  extensions: require('interpret').jsVariants,
-  v8flags: ['--harmony']
-}).on('require', function (name, module) {
-  console.log('Loading:', name);
-}).on('requireFail', function (name, err) {
-  console.log('Unable to load:', name, err);
-}).on('respawn', function (flags, child) {
-  console.log('Detected node flags:', flags);
-  console.log('Respawned to PID:', child.pid);
+  name: 'xlifftranslate'
 });
 
 XliffTranslate.launch({
-  cwd: argv.cwd,
-  configPath: argv.configPath,
-  require: argv.require,
-  completion: argv.completion,
   verbose: argv.verbose
 }, invoke);
 
@@ -39,10 +23,6 @@ function invoke(env) {
     console.log('LIFTOFF SETTINGS:', this);
     console.log('CLI OPTIONS:', argv);
     console.log('CWD:', env.cwd);
-    console.log('LOCAL MODULES PRELOADED:', env.require);
-    console.log('SEARCHING FOR:', env.configNameRegex);
-    console.log('FOUND CONFIG AT:',  env.configPath);
-    console.log('CONFIG BASE DIR:', env.configBase);
     console.log('YOUR LOCAL MODULE IS LOCATED:', env.modulePath);
     console.log('LOCAL PACKAGE.JSON:', env.modulePackage);
     console.log('CLI PACKAGE.JSON', require('../package'));
@@ -58,7 +38,7 @@ function invoke(env) {
 
 function run() {
 
-  var i18nPath = './src/i18n';
+  var i18nPath = argv.i18nPath || process.cwd();
   fs.readdir(i18nPath, function (err, files) {
     if (err) {
       console.error('Could not list the directory.', err);
@@ -67,13 +47,15 @@ function run() {
     
     files.forEach(function (file, index) {
       var fileParts = file.split('.');
-      if (!file.startsWith('messages.') || fileParts.length < 3) {
+      // Look for locale in filename (e.g. messages.de.xliff)
+      if (fileParts.length < 3) {
         return;
       }
 
       var tasks = [];
       var locale = fileParts[1];
-      locale = locale === 'en-GB' ? 'en' : locale;
+      // Use generic English for GB or UK
+      locale = locale === 'en-GB' || locale === 'en-UK' ? 'en' : locale;
       var filePath = path.join(i18nPath, file);
       var html = fs.readFileSync(filePath).toString();
       var $ = cheerio.load(html, {
