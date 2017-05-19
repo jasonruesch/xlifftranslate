@@ -54,8 +54,13 @@ function run() {
 
       var tasks = [];
       var locale = fileParts[1];
-      // Use generic English for GB or UK
-      locale = locale === 'en-GB' || locale === 'en-UK' ? 'en' : locale;
+      var lang = locale;
+      if (lang.indexOf('-') !== -1 && ['en-GB', 'zh-CN'].indexOf(lang) < 0) {
+        lang = lang.split('-')[0];
+      }
+      if (lang.indexOf('_') !== -1) {
+        lang = lang.split('_')[0];
+      }
       var filePath = path.join(i18nPath, file);
       var html = fs.readFileSync(filePath).toString();
       var $ = cheerio.load(html, {
@@ -97,7 +102,7 @@ function run() {
               callback();
               return;
             }
-            translate.translate(text.replace('<x id="INTERPOLATION"/>', '<_______>'), locale).then(function (results) {
+            translate.translate(text.replace('<x id="INTERPOLATION"/>', '<_______>'), lang).then(function (results) {
               var translations = results[0];
               var translation = Array.isArray(translations) ? translations[0] : translations;
               translation = translation.replace('<_______>', '<x id="INTERPOLATION"/>');
