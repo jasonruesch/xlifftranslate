@@ -1,7 +1,7 @@
 {
   "name": "xlifftranslate",
   "description": "Translate xliff files using the Google Cloud Translation API",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Jason Ruesch",
     "email": "jason.ruesch@me.com"
