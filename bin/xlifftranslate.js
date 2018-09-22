@@ -98,6 +98,10 @@ function run() {
         tasks.push(function () {
           return function (callback) {
             var target = node.find('target');
+            if (target.length == 0) {
+              node.append('<target></target>');
+              target = node.find('target');
+            }
             if (target.attr('state') === 'translated') {
               callback();
               return;
