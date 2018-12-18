@@ -49,7 +49,14 @@ function run() {
       var fileParts = file.split('.');
       // Look for locale in filename (e.g. messages.de.xliff)
       if (fileParts.length < 3) {
-        return;
+          if (fileParts.length == 2) {
+              var newFileParts = ['whocares', fileParts[0], fileParts[1]];
+              fileParts = newFileParts;
+          }
+          else {
+            console.log('Error, expecting three part filename like something.en.xliff');
+            return;
+          }
       }
 
       var tasks = [];
@@ -61,6 +68,7 @@ function run() {
       if (lang.indexOf('_') !== -1) {
         lang = lang.split('_')[0];
       }
+      console.log('Language: ' + lang);
       var filePath = path.join(i18nPath, file);
       var html = fs.readFileSync(filePath).toString();
       var $ = cheerio.load(html, {
@@ -78,6 +86,7 @@ function run() {
       $("file").attr('target-language', locale);
 
       $("trans-unit").each(function () {
+
         var node = $(this);
 
         if (-1 === getNodeIndexFromNodeList(transNodes, node)) {
@@ -94,22 +103,44 @@ function run() {
       // Translate
       $("trans-unit").each(function () {
         var node = $(this);
+        //console.log(this);
+	    //console.log(node.html());
+          // console.log(node.find('source'));
         var text = node.find('source').html();
+        //console.log(text);
         tasks.push(function () {
           return function (callback) {
+            var source = node.find('source');
             var target = node.find('target');
-            if (target.length == 0) {
-              node.append('<target></target>');
-              target = node.find('target');
-            }
-            if (target.attr('state') === 'translated') {
+//            if (target.length == 0) {
+//              node.append('<target/>');
+//              target = node.find('target');
+//            }
+            if (target.attr('state') === 'translated' ) {
               callback();
               return;
             }
-            translate.translate(text.replace('<x id="INTERPOLATION"/>', '<_______>'), lang).then(function (results) {
+
+            text = text.replace('<x id="INTERPOLATION"/>', '<_______>');
+            text = text.replace('%@', '<______>');
+            text = text.replace('%d', '<_____>');
+            text = text.replace('%f', '<____>');
+            text = text.replace('%1$d:%2$02d', '<___>');
+            text = text.replace('%2$@', '<__>');
+            text = text.replace('%1$d', '<_>');
+
+            translate.translate(text, lang).then(function (results) {
               var translations = results[0];
               var translation = Array.isArray(translations) ? translations[0] : translations;
+
               translation = translation.replace('<_______>', '<x id="INTERPOLATION"/>');
+              translation = translation.replace('<______>', '%@');
+              translation = translation.replace('<_____>', '%d');
+              translation = translation.replace('<____>', '%f');
+              translation = translation.replace('<___>', '%1$d:%2$02d');
+              translation = translation.replace('<__>', '%2$@');
+              translation = translation.replace('<_>', '%1$d');
+
               console.log(`${locale}: ${text} => ${translation}`);
               target.attr('xml:lang', locale);
               target.attr('state', 'translated');
@@ -135,7 +166,9 @@ function run() {
 
 function getNodeIndexFromNodeList(nodeList, node) {
   for (var i = 0, iLen = nodeList.length; i < iLen; i++) {
-    if (nodeList[i].attr("id") == node.attr("id")) {
+    var nodeListId = nodeList[i].attr("id");
+    var nodeId = node.attr("id");
+    if (nodeListId == nodeId) {
       return i;
     }
   }
