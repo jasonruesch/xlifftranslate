@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 
 var Liftoff = require('liftoff');
 var argv = require('minimist')(process.argv.slice(2));
@@ -37,6 +36,13 @@ function invoke(env) {
 }
 
 function run() {
+
+  var ignoreTextArgv = argv.ignoreText || '';
+  var ignoreDelimiter = argv.ignoreDelimiter || ' ';
+  var ignoreText = ignoreTextArgv.split(ignoreDelimiter);
+  ignoreText.push('<x id="INTERPOLATION"/>');
+
+  var skipDifferent = argv.skipDifferent === 'true';
 
   var i18nPath = argv.i18nPath || process.cwd();
   fs.readdir(i18nPath, function (err, files) {
@@ -112,34 +118,38 @@ function run() {
           return function (callback) {
             var source = node.find('source');
             var target = node.find('target');
-//            if (target.length == 0) {
-//              node.append('<target/>');
-//              target = node.find('target');
-//            }
             if (target.attr('state') === 'translated' ) {
               callback();
               return;
             }
 
-            text = text.replace('<x id="INTERPOLATION"/>', '<_______>');
-            text = text.replace('%@', '<______>');
-            text = text.replace('%d', '<_____>');
-            text = text.replace('%f', '<____>');
-            text = text.replace('%1$d:%2$02d', '<___>');
-            text = text.replace('%2$@', '<__>');
-            text = text.replace('%1$d', '<_>');
+            // skip if the caller wants to skip source/target that are unequal.
+            if (skipDifferent == true && source !== target) {
+              callback();
+              return;
+            }
+
+            // text = text.replace('%@', '<_______>');
+            // text = text.replace('%d', '<______>');
+            // text = text.replace('%f', '<_____>');
+            // text = text.replace('%1$d:%2$02d', '<____>');
+            // text = text.replace('%2$@', '<___>');
+            // text = text.replace('%1$d', '<__>');
+	        // text = text.replace('<x id="INTERPOLATION"/>', '<_>');
+            text = replaceIgnoreTextWithPlaceholders(ignoreText, text, false);
 
             translate.translate(text, lang).then(function (results) {
               var translations = results[0];
               var translation = Array.isArray(translations) ? translations[0] : translations;
 
-              translation = translation.replace('<_______>', '<x id="INTERPOLATION"/>');
-              translation = translation.replace('<______>', '%@');
-              translation = translation.replace('<_____>', '%d');
-              translation = translation.replace('<____>', '%f');
-              translation = translation.replace('<___>', '%1$d:%2$02d');
-              translation = translation.replace('<__>', '%2$@');
-              translation = translation.replace('<_>', '%1$d');
+              // translation = translation.replace('<_______>', '%@');
+              // translation = translation.replace('<______>', '%d');
+              // translation = translation.replace('<_____>', '%f');
+              // translation = translation.replace('<____>', '%1$d:%2$02d');
+              // translation = translation.replace('<___>', '%2$@');
+              // translation = translation.replace('<__>', '%1$d');
+	          // translation = translation.replace('<_>', '<x id="INTERPOLATION"/>');
+              translation = replaceIgnoreTextWithPlaceholders(ignoreText, translation, true);
 
               console.log(`${locale}: ${text} => ${translation}`);
               target.attr('xml:lang', locale);
@@ -162,6 +172,29 @@ function run() {
       });
     });
   });
+}
+
+function replaceIgnoreTextWithPlaceholders(ignoreTexts, stringToEdit, reverse) {
+  var index = 0;
+  ignoreTexts.forEach(function(value) {
+    var placeholderTag = getPlaceholderIgnoreTagForIndex(index);
+    if (reverse) { // after translation, put ignore strings back.
+      stringToEdit = stringToEdit.replace(placeholderTag, value);
+    }
+    else { // before translation, replace with tag placeholders that will get ignored by GT.
+      stringToEdit = stringToEdit.replace(value, placeholderTag);
+    }
+    index++;
+  });
+  return stringToEdit;
+}
+
+function getPlaceholderIgnoreTagForIndex(index) {
+  var baseTag = '<_>';
+  for (var i = 0; i <= index; i++) {
+    // Create a larger and larger tag for each ignore placeholer. Ex: <_____>
+    baseTag = baseTag.slice(0, 1) + '_' + baseTag.slice(1);
+  }
 }
 
 function getNodeIndexFromNodeList(nodeList, node) {
