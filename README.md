@@ -22,10 +22,10 @@
 `xlifftranslate --i18nPath src/i18n`
 
 #### Additional options:
-`--verbose` adds verbose output with translations.
-`--ignoreText "ignoreme ignoremetoo"` ignores the specified strings with default delimiter " ".
-`--ignoreDelimiter " "` Specify the delimiter for the --ignoreText optionl
-`--skipDifferent "true"` Skip translations of strings where <source> and <target> don't match. 
+- `--verbose` adds verbose output with translations.
+- `--ignoreText "ignoreme ignoremetoo"` ignores the specified strings with default delimiter " ".
+- `--ignoreDelimiter " "` Specify the delimiter for the --ignoreText optionl
+- `--skipDifferent "true"` Skip translations of strings where <source> and <target> don't match. 
 
 [npm-badge]: https://img.shields.io/npm/v/xlifftranslate.svg
 [npm-badge-url]: https://www.npmjs.com/package/xlifftranslate
