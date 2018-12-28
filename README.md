@@ -14,7 +14,7 @@
 - `--verbose` adds verbose output with translations.
 - `--ignoreText "ignoreme ignoremetoo"` ignores the specified strings with default delimiter " ".
 - `--ignoreDelimiter " "` Specify the delimiter for the --ignoreText option
-- `--skipDifferent "true"` Skip translations of strings where <source> and <target> don't match.
+- `--skipDifferent "true"` Skip translations of strings where source and target don't match.
 
 ### Examples
 
