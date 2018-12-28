@@ -39,10 +39,11 @@ function run() {
 
   var ignoreTextArgv = argv.ignoreText || '';
   var ignoreDelimiter = argv.ignoreDelimiter || ' ';
+  var verbose = argv.vervose === 'true' || argv.vervose === true || false;
   var ignoreText = ignoreTextArgv.split(ignoreDelimiter);
   ignoreText.push('<x id="INTERPOLATION"/>');
 
-  var skipDifferent = argv.skipDifferent === 'true';
+  var skipDifferent = argv.skipDifferent === 'true' || argv.skipDifferent === true || false;
 
   var i18nPath = argv.i18nPath || process.cwd();
   fs.readdir(i18nPath, function (err, files) {
@@ -74,7 +75,9 @@ function run() {
       if (lang.indexOf('_') !== -1) {
         lang = lang.split('_')[0];
       }
-      console.log('Language: ' + lang);
+      if (verbose) {
+          console.log('Language found: ' + lang);
+      }
       var filePath = path.join(i18nPath, file);
       var html = fs.readFileSync(filePath).toString();
       var $ = cheerio.load(html, {
@@ -109,11 +112,7 @@ function run() {
       // Translate
       $("trans-unit").each(function () {
         var node = $(this);
-        //console.log(this);
-	    //console.log(node.html());
-          // console.log(node.find('source'));
         var text = node.find('source').html();
-        //console.log(text);
         tasks.push(function () {
           return function (callback) {
             var source = node.find('source');
@@ -129,29 +128,16 @@ function run() {
               return;
             }
 
-            // text = text.replace('%@', '<_______>');
-            // text = text.replace('%d', '<______>');
-            // text = text.replace('%f', '<_____>');
-            // text = text.replace('%1$d:%2$02d', '<____>');
-            // text = text.replace('%2$@', '<___>');
-            // text = text.replace('%1$d', '<__>');
-	        // text = text.replace('<x id="INTERPOLATION"/>', '<_>');
             text = replaceIgnoreTextWithPlaceholders(ignoreText, text, false);
 
             translate.translate(text, lang).then(function (results) {
               var translations = results[0];
               var translation = Array.isArray(translations) ? translations[0] : translations;
 
-              // translation = translation.replace('<_______>', '%@');
-              // translation = translation.replace('<______>', '%d');
-              // translation = translation.replace('<_____>', '%f');
-              // translation = translation.replace('<____>', '%1$d:%2$02d');
-              // translation = translation.replace('<___>', '%2$@');
-              // translation = translation.replace('<__>', '%1$d');
-	          // translation = translation.replace('<_>', '<x id="INTERPOLATION"/>');
               translation = replaceIgnoreTextWithPlaceholders(ignoreText, translation, true);
-
-              console.log(`${locale}: ${text} => ${translation}`);
+              if (verbose) {
+                console.log(`${locale}: ${text} => ${translation}`);
+              }
               target.attr('xml:lang', locale);
               target.attr('state', 'translated');
               target.html(translation);
@@ -195,6 +181,7 @@ function getPlaceholderIgnoreTagForIndex(index) {
     // Create a larger and larger tag for each ignore placeholer. Ex: <_____>
     baseTag = baseTag.slice(0, 1) + '_' + baseTag.slice(1);
   }
+  return baseTag;
 }
 
 function getNodeIndexFromNodeList(nodeList, node) {
