@@ -36,4 +36,10 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+# Google Translate Credential document
 service_account.json
+
+# Jetbrains Project Files
+.idea/
+
+
