@@ -18,7 +18,8 @@
 
 `export GOOGLE_APPLICATION_CREDENTIALS=service_account.json` 
 
-#### Example run command
+> Example run command
+
 `xlifftranslate --i18nPath src/i18n`
 
 #### Additional options:
