@@ -1,7 +1,7 @@
 {
   "name": "xlifftranslate",
   "description": "Translate xliff files using the Google Cloud Translation API",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": {
     "name": "Jason Ruesch",
     "email": "jason.ruesch@me.com"
@@ -26,6 +26,7 @@
   "bin": {
     "xlifftranslate": "./bin/xlifftranslate.js"
   },
+  "preferGlobal": true,
   "keywords": [
     "command line",
     "language",
