@@ -40,11 +40,15 @@ function run() {
 
   var ignoreTextArgv = argv.ignoreText || '';
   var ignoreDelimiter = argv.ignoreDelimiter || ' ';
-  var verbose = argv.vervose === 'true' || argv.vervose === true || false;
+  var verbose = argv.verbose === 'true' ||
+      argv.verbose === "true" ||
+      argv.verbose === true || false;
   var ignoreText = ignoreTextArgv.split(ignoreDelimiter);
   ignoreText.push('<x id="INTERPOLATION"/>');
 
-  var skipDifferent = argv.skipDifferent === 'true' || argv.skipDifferent === true || false;
+  var skipDifferent = argv.skipDifferent === 'true' ||
+      argv.skipDifferent === "true" ||
+      argv.skipDifferent === true || false;
 
   var i18nPath = argv.i18nPath || process.cwd();
   fs.readdir(i18nPath, function (err, files) {
@@ -124,7 +128,7 @@ function run() {
             }
 
             // skip if the caller wants to skip source/target that are unequal.
-            if (skipDifferent == true && source !== target) {
+            if (skipDifferent === true && source !== target) {
               callback();
               return;
             }
