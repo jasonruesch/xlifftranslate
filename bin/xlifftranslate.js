@@ -38,6 +38,18 @@ function invoke(env) {
 
 function run() {
 
+  var ignoreTextArgv = argv.ignoreText || '';
+  var ignoreDelimiter = argv.ignoreDelimiter || ' ';
+  var verbose = argv.verbose === 'true' ||
+      argv.verbose === "true" ||
+      argv.verbose === true || false;
+  var ignoreText = ignoreTextArgv.split(ignoreDelimiter);
+  ignoreText.push('<x id="INTERPOLATION"/>');
+
+  var skipDifferent = argv.skipDifferent === 'true' ||
+      argv.skipDifferent === "true" ||
+      argv.skipDifferent === true || false;
+
   var i18nPath = argv.i18nPath || process.cwd();
   fs.readdir(i18nPath, function (err, files) {
     if (err) {
@@ -49,7 +61,14 @@ function run() {
       var fileParts = file.split('.');
       // Look for locale in filename (e.g. messages.de.xliff)
       if (fileParts.length < 3) {
-        return;
+          if (fileParts.length == 2) {
+              var newFileParts = ['whocares', fileParts[0], fileParts[1]];
+              fileParts = newFileParts;
+          }
+          else {
+            console.log('Error, expecting three part filename like something.en.xliff');
+            return;
+          }
       }
 
       var tasks = [];
@@ -60,6 +79,9 @@ function run() {
       }
       if (lang.indexOf('_') !== -1) {
         lang = lang.split('_')[0];
+      }
+      if (verbose) {
+          console.log('Language found: ' + lang);
       }
       var filePath = path.join(i18nPath, file);
       var html = fs.readFileSync(filePath).toString();
@@ -78,6 +100,7 @@ function run() {
       $("file").attr('target-language', locale);
 
       $("trans-unit").each(function () {
+
         var node = $(this);
 
         if (-1 === getNodeIndexFromNodeList(transNodes, node)) {
@@ -97,16 +120,29 @@ function run() {
         var text = node.find('source').html();
         tasks.push(function () {
           return function (callback) {
+            var source = node.find('source');
             var target = node.find('target');
-            if (target.attr('state') === 'translated') {
+            if (target.attr('state') === 'translated' ) {
               callback();
               return;
             }
-            translate.translate(text.replace('<x id="INTERPOLATION"/>', '<_______>'), lang).then(function (results) {
+
+            // skip if the caller wants to skip source/target that are unequal.
+            if (skipDifferent === true && source !== target) {
+              callback();
+              return;
+            }
+
+            text = replaceIgnoreTextWithPlaceholders(ignoreText, text, false);
+
+            translate.translate(text, lang).then(function (results) {
               var translations = results[0];
               var translation = Array.isArray(translations) ? translations[0] : translations;
-              translation = translation.replace('<_______>', '<x id="INTERPOLATION"/>');
-              console.log(`${locale}: ${text} => ${translation}`);
+
+              translation = replaceIgnoreTextWithPlaceholders(ignoreText, translation, true);
+              if (verbose) {
+                console.log(`${locale}: ${text} => ${translation}`);
+              }
               target.attr('xml:lang', locale);
               target.attr('state', 'translated');
               target.html(translation);
@@ -129,9 +165,35 @@ function run() {
   });
 }
 
+function replaceIgnoreTextWithPlaceholders(ignoreTexts, stringToEdit, reverse) {
+  var index = 0;
+  ignoreTexts.forEach(function(value) {
+    var placeholderTag = getPlaceholderIgnoreTagForIndex(index);
+    if (reverse) { // after translation, put ignore strings back.
+      stringToEdit = stringToEdit.replace(placeholderTag, value);
+    }
+    else { // before translation, replace with tag placeholders that will get ignored by GT.
+      stringToEdit = stringToEdit.replace(value, placeholderTag);
+    }
+    index++;
+  });
+  return stringToEdit;
+}
+
+function getPlaceholderIgnoreTagForIndex(index) {
+  var baseTag = '<_>';
+  for (var i = 0; i <= index; i++) {
+    // Create a larger and larger tag for each ignore placeholer. Ex: <_____>
+    baseTag = baseTag.slice(0, 1) + '_' + baseTag.slice(1);
+  }
+  return baseTag;
+}
+
 function getNodeIndexFromNodeList(nodeList, node) {
   for (var i = 0, iLen = nodeList.length; i < iLen; i++) {
-    if (nodeList[i].attr("id") == node.attr("id")) {
+    var nodeListId = nodeList[i].attr("id");
+    var nodeId = node.attr("id");
+    if (nodeListId == nodeId) {
       return i;
     }
   }
