@@ -18,7 +18,7 @@
 
 ### Examples
 
-> To run, make sure your Google Translate API Credendials are in your environment:
+> To run, make sure your Google Translate API Credentials are in your environment:
 
 `export GOOGLE_APPLICATION_CREDENTIALS=service_account.json` 
 
