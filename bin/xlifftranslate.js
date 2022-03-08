@@ -6,18 +6,25 @@ var cheerio = require('cheerio');
 var fs = require('fs');
 var path = require('path');
 var runAsync = require("async");
-var Translate = require('@google-cloud/translate');
-var translate = Translate();
+const {Translate} = require('@google-cloud/translate').v2;
+const translate = new Translate({key: process.env.GOOGLE_API_KEY });
 
 var XliffTranslate = new Liftoff({
   name: 'xlifftranslate'
 });
 
-XliffTranslate.launch({
-  verbose: argv.verbose
-}, invoke);
+const onPrepare = function (env) {
+  XliffTranslate.execute(env, invoke);
+};
 
-function invoke(env) {
+XliffTranslate.prepare(
+  {
+    verbose: argv.verbose,
+  },
+  onPrepare
+);
+
+function invoke(env, argv) {
 
   if (argv.verbose) {
     console.log('LIFTOFF SETTINGS:', this);
