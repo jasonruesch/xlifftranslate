@@ -37,7 +37,7 @@
   ],
   "dependencies": {
     "@google-cloud/translate": "^0.8.1",
-    "async": "^2.4.0",
+    "async": "^3.2.2",
     "cheerio": "^1.0.0-rc.2",
     "liftoff": "^2.3.0",
     "minimist": "^1.2.0"
