@@ -15,6 +15,7 @@
 - `--ignoreText "ignoreme ignoremetoo"` ignores the specified strings with default delimiter " ".
 - `--ignoreDelimiter " "` Specify the delimiter for the --ignoreText option
 - `--skipDifferent "true"` Skip translations of strings where source and target don't match.
+- `--reTranslateExisting "true"` Re-translate everything, even if it has a non-blank value.
 
 ### Examples
 
