@@ -6,7 +6,7 @@ var cheerio = require('cheerio');
 var fs = require('fs');
 var path = require('path');
 var async = require('async');
-var sleep = require('sleep')
+// var sleep = require('sleep')
 var Translate = require('@google-cloud/translate');
 var translate = Translate();
 
@@ -127,7 +127,7 @@ var q = async.queue(function (task, callback) {
     target.attr('state', 'translated');
     numTranslated++;
     target.html(translation.trim());
-    sleep.usleep(200)
+    // sleep.usleep(200)
     callback();
   }).catch(function (err) {
     if (err.code === 400) {
